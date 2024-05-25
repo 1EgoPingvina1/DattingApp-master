@@ -1,0 +1,69 @@
+<div class="container mt-3" *ngIf="userParams">
+   <form #form="ngForm" class="d-flex mb-3" (submit)="loadMembers()" autocomplete="off">
+      <div class="d-flex mx-2">
+         <label class="col-form-label">От:</label>
+         <input type="number" class="form-control ms-1" style="width: 70px;" name="minAge" [(ngModel)]="userParams.minAge">
+      </div>
+
+      <div class="d-flex mx-3">
+         <label class="col-form-label">До:</label>
+         <input type="number" class="form-control ms-1" style="width: 90px;" name="maxAge" [(ngModel)]="userParams.maxAge">
+      </div>
+
+      <div class="d-flex px-3">
+         <label class="col-form-label me-2">Показать</label>
+         <select name="gender" style="width: 130px;" class="form-select ms-1" [(ngModel)]="userParams.gender">
+            <option *ngFor="let gender of genderList" [value]="gender.value">
+               {{gender.display}}
+            </option>
+         </select>
+      </div>
+
+      <button style="background-color: #FA4D6B; color: white;" class="btn ms-1" type="submit">Применить</button>
+      <button style="background-color: #6CD3AC; color: white;" class="btn ms-1" (click)="resetFilters()" type="submit">Сбросить</button>
+
+      <div class="col">
+         <div class="btn-group float-end">
+            <button
+               type="button" 
+               class="btn" 
+               name="orderBy" 
+               (click)="loadMembers()"
+               [(ngModel)]="userParams.orderBy"
+               btnRadio="lastActive">Онлайн
+            </button>
+
+            <button
+            type="button" 
+            class="btn" 
+            name="orderBy" 
+            (click)="loadMembers()"
+            [(ngModel)]="userParams.orderBy"
+            btnRadio="created">Был в сети
+         </button>
+         </div>
+      </div>
+
+   </form>
+</div>
+
+<div class="row">
+   <div class="col-2" *ngFor="let member of members">
+      <app-member-card [member]="member"></app-member-card>
+   </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+   <pagination 
+      [boundaryLinks]="true" 
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [maxSize]="12"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pagedChanged($event)"
+      previousText="&lsaquo;" 
+      nextText="&rsaquo;" 
+      firstText="&laquo;" 
+      lastText="&raquo;">
+</pagination>
+</div>

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datingservice
+  template:
+    metadata:
+      labels:
+        app: datingservice
+    spec:
+      containers:
+        - name: datingservice
+          image: 1developer1/datingapp-service:latest
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#     name: datingapp-clusterip-srv
+# spec:
+#     type: ClusterIP
+#     selector:
+#         app: datingservice
+#     ports:
+#     - name: datingservice
+#       protocol: TCP
+#       port: 443
+#       targetPort: 443
