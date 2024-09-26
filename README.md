@@ -19,7 +19,8 @@ Caching: Optimized caching on the Angular services side
 CQRS + MediatR: Implemented Command and Query Responsibility Segregation pattern for better code organization
 Angular Route Guards: Prevent accidental actions with route guards
 Angular Interceptors: Send queries with authentication headers
-How to Install
+
+How to Install?
 1️⃣ Download the backend + frontend source code 
 2️⃣ Run the API (it will automatically migrate the SQL Server database) 
 3️⃣ Launch the client site: ng serve
